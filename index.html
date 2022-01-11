@@ -14,7 +14,7 @@
   <h2>1. Paste BluePrint Text Here</h2>
   <p>
   <!-- editable textarea, with default placeholder text 'here' -->
-  <textarea id="textarea" rows="10" cols="50" placeholder="Paste your SBC file contents here..."></textarea>
+  <textarea id="bp-textarea" rows="10" cols="50" placeholder="Paste your SBC file contents here..."></textarea>
   </p>
 
   <h2>2. Press GO</h2>
@@ -26,7 +26,12 @@
   <script>
     // script function BACC(),  updates 'result' textarea with text 'example'
     function calculateBACC() {
-      document.getElementById("result").innerHTML = "SUPER AWESOME BACC result";
+      var BluePrintText = $('#bp-textarea').val();
+
+      // count the number of "SubtypeName" in the text
+      var SubtypeCount = (BluePrintText.match(/SubtypeName/g) || []).length;
+    
+      document.getElementById("result").innerHTML = "SUPER AWESOME BACC result; Found " + SubtypeCount + " SubtypeName's";
     }
   </script>
   
