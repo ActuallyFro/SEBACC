@@ -2,6 +2,13 @@
 
 #A simple script that will find XML tags in an bp.sbc file, find all the unique tags, and calculate total component amounts from a JSON look up file.
 
+doesJQExist=`which jq`
+
+if [[ "$doesJQExist" == "" ]]; then
+  echo "[ERROR] this script needs 'jq' to be installed!"
+  exit
+fi
+
 #check if file exists
 fileName="example_file-Coelacanth_bp.sbc"
 if [ -f "$1" ]; then
