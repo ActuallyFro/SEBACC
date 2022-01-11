@@ -1,0 +1,3 @@
+https://github.com/phrasz/SEBlueprintCalc/blob/main/SEBlueprintCalc/Data/Components.json
+-- ALL values are statically calculated (but are done)
+For instance: To make the component in an assembler, it has ALL components pre-calculated
