@@ -42,8 +42,17 @@
       var Blocks = xmlDoc.getElementsByTagName("SubtypeName");
       //used in example as: xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
 
+      //Iterate over all blocks, look up their costs in the Blocks.json file, and add them to the total
       var BlocksString = "";
+
+      //Hashmap to store the block costs; key is the block name, value is the cost
+      var BlockCosts = {};
+
       for (var i = 0; i < Blocks.length; i++) {
+        //Search for the block name in the Blocks.json file with JSON.parse()
+        
+
+        BlockCosts[Blocks[i].childNodes[0].nodeValue] = 0;
         BlocksString += Blocks[i].innerHTML + ", ";
       }
       // remove trailing comma
