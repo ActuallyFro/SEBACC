@@ -54,53 +54,31 @@
 
       var BluePrintText = $('#bp-textarea').val();
 
-      // // count the number of "SubtypeName" in the text
-      // var SubtypeCount = (BluePrintText.match(/SubtypeName/g) || []).length;
 
-      // empty array to store strings, called "Blocks"
-      var Blocks = [];
-
-      // https://www.w3schools.com/xml/tryit.asp?filename=try_dom_loadxmltext
+      // https://www.w3schools.com/xml/tryit.asp?filename=try_dom_loadxmltext:
       parseXMLTags= new DOMParser();
       xmlDoc = parseXMLTags.parseFromString(BluePrintText,"text/xml");
 
-      //Get all nodeValues of the "SubtypeName" tags
+      var Blocks = [];
       var Blocks = xmlDoc.getElementsByTagName("SubtypeName");
-      //used in example as: xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
 
-      //Iterate over all blocks, look up their costs in the Blocks.json file, and add them to the total
       var BlocksString = "";
-
-      //Hashmap to store the block costs; key is the block name, value is the cost
       var BlockCosts = {};
       
       for (var i = 0; i < Blocks.length; i++) {
-        //Access the 'Cost' data fron jsonData
-        // var BlockCost = jsonData.result[i].Cost;
 
-        // //get ields in json data:
-        // var BlockCost = jsonData.Blocks[i].Cost;
-        
-        // //print the block name and cost to the console
-        // for (var ii = 0; ii < BlockCost.length; ii++) {
-        //   console.log(Blocks[i].innerHTML + ": " + BlockCost[ii]);
-        // }
-        
-//iterate over jsonData, print object to console
+        // // Jquery based!:
+        // $.each(jsonData, function(key, val) {          
+        //   //print key to console
+        //   console.log(key);
 
+        //   $.each(val, function(k, v) {
+        //     console.log('key ='+k);
+        //     console.log('value ='+v);
+        //     //  alert('key = '+k+', value = '+v);
+        //   });
+        // });
 
-//         for (var ii = 0; ii < jsonData.length; ii++) {
-//           var BlockVal = jsonData[ii];
-//           if (Blocks[i].innerHTML == jsonData.result[ii].Name) {
-//             //add the cost to the total
-//             // BlocksString += Blocks[i].innerHTML + ": " + jsonData.result[ii].Cost + "\n";
-//             BlockCosts[Blocks[i].innerHTML] = jsonData.result[ii].Cost;
-//           }
-//         }
-
-
-
-        // BlockCosts[Blocks[i].childNodes[0].nodeValue] = 0;
         BlocksString += Blocks[i].innerHTML + ", ";
       }
       // remove trailing comma
