@@ -63,7 +63,7 @@
       var Blocks = xmlDoc.getElementsByTagName("SubtypeName");
 
       var BlocksString = "";
-      var BlockCosts = {};
+      var BlockCosts = new Map();
       
       for (var i = 0; i < Blocks.length; i++) {
 
