@@ -20,6 +20,11 @@
       request.send(null);
       var jsonData = JSON.parse(request.responseText);
 
+      var request2 = new XMLHttpRequest();
+      request2.open("GET","Components.json", false);
+      request2.send(null);
+      var jsonDataMaterials = JSON.parse(request2.responseText);
+
       // console.log(jsonData); //--debug to see if data is loaded
 
       var BluePrintText = $('#bp-textarea').val();
@@ -31,9 +36,9 @@
       var Blocks = [];
       var Blocks = xmlDoc.getElementsByTagName("SubtypeName");
 
-      var BlocksCount = new Map;
+      var BlocksCount = new Map();
       var BlockCosts = new Map();
-      var BlockMaterials = new Map;
+      var BlockMaterials = new Map();
 
       // var BlocksString = "";
       var CalcStrBlocks ="";
@@ -68,6 +73,29 @@
               BlockCosts.set(keyCost, BlockCosts.get(keyCost) + componentCost);
 
               //Materials Checks
+              $.each(jsonDataMaterials, function(keyMat, materialData) {
+                //COPILOT
+                if (keyCost == keyMat) {
+                  console.log("[DEBUG] Found materials for component("+keyMat+")! ..getting costs");
+
+                  var IngotCosts = materialData.Cost;
+                  $.each(IngotCosts, function(keyCostMats, materialCost) {
+                    console.log("[DEBUG] Found materials cost for:"+keyCostMats);
+                  //   //check if map value exists, if not set to 0
+                    if (!BlockMaterials.has(keyCostMats)) {
+                      BlockMaterials.set(keyCostMats, 0);
+                      console.log("[WARNING] Adding NEW material: " + keyCostMats);
+                    }
+
+                    //increment BlockCosts by val
+                    BlockMaterials.set(keyCostMats, BlockMaterials.get(keyCostMats) + materialCost);
+                  });
+
+                }
+              //COPILOT
+              });
+
+              // 
 
             });
           }
@@ -78,24 +106,34 @@
       // iterate over BlocksCount map and print to console:
       var SectionStr ="BLOCKS:"
       CalcStrBlocks = SectionStr;
-      console.log("\n"+SectionStr);
+      //console.log("\n"+SectionStr);
       BlocksCount.forEach(function(val, key) {
-        console.log("[Blocks] " + key + ": " + val);
+        //console.log("[Blocks] " + key + ": " + val);
         CalcStrBlocks += "\n" + key + ": " + val;
       });
 
       SectionStr ="COMPONENTS:"
       CalcStrComponents = SectionStr;
-      console.log("\n"+SectionStr);
+      //console.log("\n"+SectionStr);
       // iterate over BlockCosts map and print to console:
       BlockCosts.forEach(function(value, key) {
-        console.log("[Components] " + key + ": " + value);
+        //console.log("[Components] " + key + ": " + value);
         CalcStrComponents += "\n" + key + ": " + value;
+      });
+
+
+      SectionStr ="Ingots:"
+      CalcStrMaterials = SectionStr;
+      //console.log("\n"+SectionStr);
+      // iterate over BlockMaterials map and print to console:
+      BlockMaterials.forEach(function(value, key) {
+        //console.log("[Materials] " + key + ": " + value);
+        CalcStrMaterials += "\n" + key + ": " + value;
       });
 
       document.getElementById("result-blocks").innerHTML = CalcStrBlocks;
       document.getElementById("result-components").innerHTML = CalcStrComponents;
-      //TODO: document.getElementById("result-ingots").innerHTML = CalcStrMaterials;
+      document.getElementById("result-ingots").innerHTML = CalcStrMaterials;
 
     }
   </script>
