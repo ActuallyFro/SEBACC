@@ -1,22 +1,14 @@
 <!-- Create page with a text area, which can be searched for the word "foundme", that is updated in a results box .innerHTML -->
 <html>
 <head>
-<title>SEBACC - Space Engineers Block And Component Calculator</title>
-</head>
+  <meta charset="utf-8">
+  <title>SEBACC - Space Engineers Block And Component Calculator</title>
 
-<!-- load jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- Load scripts on Pageload -->
-  
-<body>
-  <h1>SEBACC - Space Engineers Block And Component Calculator</h2>
-
-  <h2>1. Paste BluePrint Text Here</h2>
-  <p><textarea id="bp-textarea" rows="10" cols="50" placeholder="Paste your SBC file contents here..."></textarea></p>
-
-  <h2>2. Press GO</h2>
-  <button onclick="calculateBACC()">GO</button>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
     // script function BACC(),  updates 'result' textarea with text 'example'
@@ -107,20 +99,53 @@
         CalcStrComponents += "\n" + key + ": " + value;
       });
 
-      document.getElementById("result").innerHTML = CalcStrBlocks + "\n\n" + CalcStrComponents;
+      document.getElementById("result-blocks").innerHTML = CalcStrBlocks;
+      document.getElementById("result-components").innerHTML = CalcStrComponents;
+      //TODO: document.getElementById("result-ingots").innerHTML = CalcStrMaterials;
 
     }
   </script>
   
 
-  <h2>3. Profit??? (Calculation Result)</h2>
-  <!-- Calculation TextArea that's updated by Javascript -->
-  <textarea id="result" rows="10" cols="50" placeholder="Calculation Result" spellcheck="false"></textarea>
+</head>
 
-  <p>
-  </p>
+<!-- Load scripts on Pageload -->
+  
+<body>
 
+  <div class="container-fluid p-0 bg-primary text-white text-center">
+    <h1>SEBACC</h1>
+    <p>Space Engineers Block And Component Calculator</p> 
+  </div>
 
+  <div class="container mt-1 border mb-sm-2">
+  
+    <div class="container mt-0">
+      <p class="h5">1. Paste BluePrint Text Here</p>
+    <p><textarea id="bp-textarea" rows="1" cols="50" placeholder="Paste your SBC file contents here..."></textarea></p>
+    </div>  
+
+    <div class="container mt-0">
+      <p class="h5">2. Press GO:  <button onclick="calculateBACC()">GO</button> </p>
+    </div>
+
+    <div class="container mt-0">
+      <p class="h5">3. Profit??? (Calculation Result)</p>
+      <!-- Calculation TextArea that's updated by Javascript -->
+
+      <div class="row">
+        <div class="col-sm-4">
+          <textarea id="result-blocks" rows="10" cols="30" placeholder="Calculation Blocks" spellcheck="false"></textarea>
+        </div>
+        <div class="col-sm-4">
+          <textarea id="result-components" rows="10" cols="30" placeholder="Calculation Components" spellcheck="false"></textarea>
+        </div>
+        <div class="col-sm-4">
+          <textarea id="result-ingots" rows="10" cols="30" placeholder="Calculation Ingots" spellcheck="false"></textarea>
+        </div>
+      </div>
+    </div>  
+  </div>    <!-- <div class="container mt-1"> -->
   
   </body>
 </html>
