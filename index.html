@@ -67,17 +67,18 @@
       
       for (var i = 0; i < Blocks.length; i++) {
 
-        // // Jquery based!:
-        // $.each(jsonData, function(key, val) {          
-        //   //print key to console
-        //   console.log(key);
+        // Jquery based!:
+        $.each(jsonData, function(key, val) {
+          if (Blocks[i].innerHTML == key) {
+            //print key to console
+            console.log("FOUND BLOCK!: "+ key);
+          }
 
-        //   $.each(val, function(k, v) {
-        //     console.log('key ='+k);
-        //     console.log('value ='+v);
-        //     //  alert('key = '+k+', value = '+v);
-        //   });
-        // });
+          // $.each(val, function(k, v) {
+          //   console.log('key ='+k);
+          //   console.log('value ='+v);
+          // });
+        });
 
         BlocksString += Blocks[i].innerHTML + ", ";
       }
