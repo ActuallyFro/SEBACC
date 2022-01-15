@@ -11,17 +11,12 @@
   
 <body>
   <h1>SEBACC - Space Engineers Block And Component Calculator</h2>
+
   <h2>1. Paste BluePrint Text Here</h2>
-  <p>
-  <!-- editable textarea, with default placeholder text 'here' -->
-  <textarea id="bp-textarea" rows="10" cols="50" placeholder="Paste your SBC file contents here..."></textarea>
-  </p>
+  <p><textarea id="bp-textarea" rows="10" cols="50" placeholder="Paste your SBC file contents here..."></textarea></p>
 
   <h2>2. Press GO</h2>
-  <!-- Button which runs calculateBACC() function-->
   <button onclick="calculateBACC()">GO</button>
-  <p>
-  </p>
 
   <script>
     // script function BACC(),  updates 'result' textarea with text 'example'
@@ -43,30 +38,33 @@
 
       var Blocks = [];
       var Blocks = xmlDoc.getElementsByTagName("SubtypeName");
+
       var BlocksCount = new Map;
-
-      var BlocksString = "";
       var BlockCosts = new Map();
-      
-      for (var i = 0; i < Blocks.length; i++) {
+      var BlockMaterials = new Map;
 
+      // var BlocksString = "";
+      var CalcStrBlocks ="";
+      var CalcStrComponents ="";
+      var CalcStrMaterials ="";
+
+
+      //Calculate values for EACH block
+      for (var i = 0; i < Blocks.length; i++) {
         // Jquery based!: https://stackoverflow.com/questions/36759733/parse-json-object-in-javascript-to-get-key-and-values
         $.each(jsonData, function(keyBlock, blockData) {
           if (Blocks[i].innerHTML == keyBlock) {
-            //print key to console
+
+            //Block Checks
             console.log("=================\nFOUND BLOCK!: "+ keyBlock);
             if (!BlocksCount.has(keyBlock)) {
               BlocksCount.set(keyBlock, 0);
               console.log("[WARNING] Adding NEW BLOCK: " + keyBlock);
             }
-            //increment BlocksCount by 1
             BlocksCount.set(keyBlock, BlocksCount.get(keyBlock) + 1);
 
-            //print costs to console:
-            console.log("\nCOSTS: ");
-
+            //Component Checks
             var MatCosts = blockData.Cost;
-            // for each MatCosts, print to console:
             $.each(MatCosts, function(keyCost, componentCost) {
               //check if map value exists, if not set to 0
               if (!BlockCosts.has(keyCost)) {
@@ -77,35 +75,40 @@
               //increment BlockCosts by val
               BlockCosts.set(keyCost, BlockCosts.get(keyCost) + componentCost);
 
-              // console.log(key + ": " + val + "(Total: " + BlockCosts[key] + ")");
+              //Materials Checks
+
             });
           }
-
-          // $.each(val, function(k, v) {
-          //   console.log('key ='+k);
-          //   console.log('value ='+v);
-          // });
         });
 
-        BlocksString += Blocks[i].innerHTML + ", ";
+        // BlocksString += Blocks[i].innerHTML + ", ";
       }
-      // remove trailing comma
-      BlocksString = BlocksString.substring(0, BlocksString.length - 2);
 
-      document.getElementById("result").innerHTML = "SUPER AWESOME BACC result; Found Blocks: {" + BlocksString + "}";
+      // // remove trailing comma
+      // BlocksString = BlocksString.substring(0, BlocksString.length - 2);
+
+      // document.getElementById("result").innerHTML = "SUPER AWESOME BACC result; Found Blocks: {" + BlocksString + "}";
 
       // iterate over BlocksCount map and print to console:
-      console.log("\nBLOCKS: ");
+      var SectionStr ="BLOCKS:"
+      CalcStrBlocks = SectionStr;
+      console.log("\n"+SectionStr);
       BlocksCount.forEach(function(val, key) {
         console.log("[Blocks] " + key + ": " + val);
+        CalcStrBlocks += "\n" + key + ": " + val;
       });
 
-
-      console.log("\nCOMPONENTS: ");
+      SectionStr ="COMPONENTS:"
+      CalcStrComponents = SectionStr;
+      console.log("\n"+SectionStr);
       // iterate over BlockCosts map and print to console:
       BlockCosts.forEach(function(value, key) {
         console.log("[Components] " + key + ": " + value);
+        CalcStrComponents += "\n" + key + ": " + value;
       });
+
+      document.getElementById("result").innerHTML = CalcStrBlocks + "\n\n" + CalcStrComponents;
+
     }
   </script>
   
