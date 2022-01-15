@@ -71,7 +71,16 @@
         $.each(jsonData, function(key, val) {
           if (Blocks[i].innerHTML == key) {
             //print key to console
-            console.log("FOUND BLOCK!: "+ key);
+            console.log("=================\nFOUND BLOCK!: "+ key);
+
+            //print costs to console:
+            console.log("\nCOSTS: ");
+
+            var MatCosts = val.Cost;
+            // for each MatCosts, print to console:
+            $.each(MatCosts, function(key, val) {
+              console.log(key + ": " + val);
+            });
           }
 
           // $.each(val, function(k, v) {
