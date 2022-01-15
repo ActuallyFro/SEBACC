@@ -28,32 +28,14 @@
     function calculateBACC() {
 
       // //https://stackoverflow.com/questions/16991341/json-parse-file-path
-      // var request = new XMLHttpRequest();
-      // request.open("GET", "./Blocks.json", false);
-      // request.send(null)
-      // var my_JSON_object = JSON.parse(request.responseText);
-      // alert (my_JSON_object.result[0]);
-
-      // var xmlhttp = new XMLHttpRequest();
-      // xmlhttp.onreadystatechange = function() {
-      // if (this.readyState == 4 && this.status == 200) {
-      //   var myObj = JSON.parse(this.responseText);
-      //     document.getElementById("demo").innerHTML = myObj.name;
-      //   }
-      // };
-      // xmlhttp.open("GET", "json_demo.txt", true);
-      // xmlhttp.send();
-
       var request = new XMLHttpRequest();
       request.open("GET","Blocks.json", false);
       request.send(null);
       var jsonData = JSON.parse(request.responseText);
 
-      //debug to see if data is loaded:
-      // console.log(jsonData);
+      // console.log(jsonData); //--debug to see if data is loaded
 
       var BluePrintText = $('#bp-textarea').val();
-
 
       // https://www.w3schools.com/xml/tryit.asp?filename=try_dom_loadxmltext:
       parseXMLTags= new DOMParser();
@@ -61,6 +43,7 @@
 
       var Blocks = [];
       var Blocks = xmlDoc.getElementsByTagName("SubtypeName");
+      var BlocksCount = new Map;
 
       var BlocksString = "";
       var BlockCosts = new Map();
@@ -68,25 +51,26 @@
       for (var i = 0; i < Blocks.length; i++) {
 
         // Jquery based!: https://stackoverflow.com/questions/36759733/parse-json-object-in-javascript-to-get-key-and-values
-        $.each(jsonData, function(key, val) {
-          if (Blocks[i].innerHTML == key) {
+        $.each(jsonData, function(keyBlock, blockData) {
+          if (Blocks[i].innerHTML == keyBlock) {
             //print key to console
-            console.log("=================\nFOUND BLOCK!: "+ key);
+            console.log("=================\nFOUND BLOCK!: "+ keyBlock);
+
 
             //print costs to console:
             console.log("\nCOSTS: ");
 
-            var MatCosts = val.Cost;
+            var MatCosts = blockData.Cost;
             // for each MatCosts, print to console:
-            $.each(MatCosts, function(key, val) {
+            $.each(MatCosts, function(keyCost, componentCost) {
               //check if map value exists, if not set to 0
-              if (!BlockCosts.has(key)) {
-                BlockCosts.set(key, 0);
-                console.log("[WARNING] Adding NEW material: " + key);
+              if (!BlockCosts.has(keyCost)) {
+                BlockCosts.set(keyCost, 0);
+                console.log("[WARNING] Adding NEW material: " + keyCost);
               }
 
               //increment BlockCosts by val
-              BlockCosts.set(key, BlockCosts.get(key) + val);
+              BlockCosts.set(keyCost, BlockCosts.get(keyCost) + componentCost);
 
               // console.log(key + ": " + val + "(Total: " + BlockCosts[key] + ")");
             });
