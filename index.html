@@ -79,7 +79,16 @@
             var MatCosts = val.Cost;
             // for each MatCosts, print to console:
             $.each(MatCosts, function(key, val) {
-              console.log(key + ": " + val);
+              //check if map value exists, if not set to 0
+              if (!BlockCosts.has(key)) {
+                BlockCosts.set(key, 0);
+                console.log("[WARNING] Adding NEW material: " + key);
+              }
+
+              //increment BlockCosts by val
+              BlockCosts.set(key, BlockCosts.get(key) + val);
+
+              // console.log(key + ": " + val + "(Total: " + BlockCosts[key] + ")");
             });
           }
 
@@ -95,6 +104,11 @@
       BlocksString = BlocksString.substring(0, BlocksString.length - 2);
 
       document.getElementById("result").innerHTML = "SUPER AWESOME BACC result; Found Blocks: {" + BlocksString + "}";
+
+      // iterate over map and print to console:
+      BlockCosts.forEach(function(value, key) {
+        console.log("[INFO] " + key + ": " + value);
+      });
     }
   </script>
   
