@@ -55,7 +55,12 @@
           if (Blocks[i].innerHTML == keyBlock) {
             //print key to console
             console.log("=================\nFOUND BLOCK!: "+ keyBlock);
-
+            if (!BlocksCount.has(keyBlock)) {
+              BlocksCount.set(keyBlock, 0);
+              console.log("[WARNING] Adding NEW BLOCK: " + keyBlock);
+            }
+            //increment BlocksCount by 1
+            BlocksCount.set(keyBlock, BlocksCount.get(keyBlock) + 1);
 
             //print costs to console:
             console.log("\nCOSTS: ");
@@ -89,9 +94,17 @@
 
       document.getElementById("result").innerHTML = "SUPER AWESOME BACC result; Found Blocks: {" + BlocksString + "}";
 
-      // iterate over map and print to console:
+      // iterate over BlocksCount map and print to console:
+      console.log("\nBLOCKS: ");
+      BlocksCount.forEach(function(val, key) {
+        console.log("[Blocks] " + key + ": " + val);
+      });
+
+
+      console.log("\nCOMPONENTS: ");
+      // iterate over BlockCosts map and print to console:
       BlockCosts.forEach(function(value, key) {
-        console.log("[INFO] " + key + ": " + value);
+        console.log("[Components] " + key + ": " + value);
       });
     }
   </script>
