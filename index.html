@@ -45,12 +45,16 @@
       var CalcStrComponents ="";
       var CalcStrMaterials ="";
 
+      var TotalBlocks = 0;
+      var TotalComponents = 0;
+      var TotalMaterials = 0;
 
       //Calculate values for EACH block
       for (var i = 0; i < Blocks.length; i++) {
         // Jquery based!: https://stackoverflow.com/questions/36759733/parse-json-object-in-javascript-to-get-key-and-values
         $.each(jsonData, function(keyBlock, blockData) {
           if (Blocks[i].innerHTML == keyBlock) {
+            TotalBlocks++;
 
             //Block Checks
             console.log("=================\nFOUND BLOCK!: "+ keyBlock);
@@ -63,6 +67,8 @@
             //Component Checks
             var MatCosts = blockData.Cost;
             $.each(MatCosts, function(keyCost, componentCost) {
+              TotalComponents++;
+
               //check if map value exists, if not set to 0
               if (!BlockCosts.has(keyCost)) {
                 BlockCosts.set(keyCost, 0);
@@ -76,6 +82,7 @@
               $.each(jsonDataMaterials, function(keyMat, materialData) {
                 //COPILOT
                 if (keyCost == keyMat) {
+                  TotalMaterials++;
                   console.log("[DEBUG] Found materials for component("+keyMat+")! ..getting costs");
 
                   var IngotCosts = materialData.Cost;
@@ -90,7 +97,7 @@
                     //increment BlockCosts by val
 
                     //Calculation, Bug hunting...:
-                    // BlockMaterials.set(keyCostMats, BlockMaterials.get(keyCostMats) + materialCost*3/2);
+                    BlockMaterials.set(keyCostMats, BlockMaterials.get(keyCostMats) + materialCost*3/2);
                     // console.log("[DEBUG] MATH: adding '" + materialCost +"' to '"+keyCostMats*3/2+"'");
 
                     BlockMaterials.set(keyCostMats, BlockMaterials.get(keyCostMats));
@@ -110,7 +117,7 @@
       }
 
       // iterate over BlocksCount map and print to console:
-      var SectionStr ="BLOCKS:"
+      var SectionStr ="BLOCKS ( "+TotalBlocks+" ):";
       CalcStrBlocks = SectionStr;
       //console.log("\n"+SectionStr);
       BlocksCount.forEach(function(val, key) {
@@ -118,7 +125,7 @@
         CalcStrBlocks += "\n" + key + ": " + val;
       });
 
-      SectionStr ="COMPONENTS:"
+      SectionStr ="COMPONENTS ( "+TotalComponents+" ):";
       CalcStrComponents = SectionStr;
       //console.log("\n"+SectionStr);
       // iterate over BlockCosts map and print to console:
@@ -128,7 +135,7 @@
       });
 
 
-      SectionStr ="Ingots:"
+      SectionStr ="Ingots ( "+TotalMaterials+" ):";
       CalcStrMaterials = SectionStr;
       //console.log("\n"+SectionStr);
       // iterate over BlockMaterials map and print to console:
