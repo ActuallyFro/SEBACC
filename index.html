@@ -67,13 +67,14 @@
             //Component Checks
             var MatCosts = blockData.Cost;
             $.each(MatCosts, function(keyCost, componentCost) {
-              TotalComponents++;
 
               //check if map value exists, if not set to 0
               if (!BlockCosts.has(keyCost)) {
                 BlockCosts.set(keyCost, 0);
                 console.log("[WARNING] Adding NEW material: " + keyCost);
               }
+
+              TotalComponents+=componentCost;
 
               //increment BlockCosts by val
               BlockCosts.set(keyCost, BlockCosts.get(keyCost) + componentCost);
@@ -82,11 +83,11 @@
               $.each(jsonDataMaterials, function(keyMat, materialData) {
                 //COPILOT
                 if (keyCost == keyMat) {
-                  TotalMaterials++;
                   console.log("[DEBUG] Found materials for component("+keyMat+")! ..getting costs");
 
                   var IngotCosts = materialData.Cost;
                   $.each(IngotCosts, function(keyCostMats, materialCost) {
+                    TotalMaterials+=materialCost;
                     console.log("[DEBUG] Found materials cost for:"+keyCostMats);
                   //   //check if map value exists, if not set to 0
                     if (!BlockMaterials.has(keyCostMats)) {
@@ -96,8 +97,8 @@
 
                     //increment BlockCosts by val
 
+                    BlockMaterials.set(keyCostMats, BlockMaterials.get(keyCostMats) + materialCost);
                     //Calculation, Bug hunting...:
-                    BlockMaterials.set(keyCostMats, BlockMaterials.get(keyCostMats) + materialCost*3/2);
                     // console.log("[DEBUG] MATH: adding '" + materialCost +"' to '"+keyCostMats*3/2+"'");
 
                     BlockMaterials.set(keyCostMats, BlockMaterials.get(keyCostMats));
