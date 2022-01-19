@@ -71,6 +71,7 @@ fi
 
 loopCounter=0
 outStr=""
+wantsJSONComponent="false"
 
 for componentCostStr in $(echo $1 | tr "," "\n"); do
   # echo "[DEBUG] Looking at: $componentCostStr"
@@ -102,144 +103,155 @@ for componentCostStr in $(echo $1 | tr "," "\n"); do
     # echo "[DEBUG] Checking material!"
     compString=""
 
-    if [ "$key" != "c" ]; then
+    if [ "$key" != "c" ] && [ "$key" != "jc" ]; then
       echo "[ERROR] No component provided!"
       exit
     fi
     
+
+    if [ "$key" == "jc" ]; then
+      wantsJSONComponent="true"
+    fi
+
     #Component Check:
     compStr=""
 
-    if [ "$value" == "200" ]; then
-      compString="200mm Missile Container"
+    if [ "$wantsJSONComponent" == "false"  ]; then
+      if [ "$value" == "200" ]; then
+        compString="200mm Missile Container"
 
-    elif [ "$value" == "25" ]; then
-      compString="25x184mm NATO Ammo Container"
+      elif [ "$value" == "25" ]; then
+        compString="25x184mm NATO Ammo Container"
 
-    elif [ "$value" == "556" ]; then
-      compString="5.56x45mm NATO Magazine"
+      elif [ "$value" == "556" ]; then
+        compString="5.56x45mm NATO Magazine"
 
-    elif [ "$value" == "bg" ]; then
-      compString="Bulletproof Glass"
+      elif [ "$value" == "bg" ]; then
+        compString="Bulletproof Glass"
 
-    elif [ "$value" == "ca" ]; then
-      compString="Canvas"
+      elif [ "$value" == "ca" ]; then
+        compString="Canvas"
 
-    elif [ "$value" == "co" ]; then
-      compString="Computer"
+      elif [ "$value" == "co" ]; then
+        compString="Computer"
 
-    elif [ "$value" == "cc" ]; then
-      compString="Construction Component"
+      elif [ "$value" == "cc" ]; then
+        compString="Construction Component"
 
-    elif [ "$value" == "dc" ]; then
-      compString="Detector Components"
+      elif [ "$value" == "dc" ]; then
+        compString="Detector Components"
 
-    elif [ "$value" == "di" ]; then
-      compString="Display"
+      elif [ "$value" == "di" ]; then
+        compString="Display"
 
-    elif [ "$value" == "ex" ]; then
-      compString="Explosives"
+      elif [ "$value" == "ex" ]; then
+        compString="Explosives"
 
-    elif [ "$value" == "gi" ]; then
-      compString="Girder"
+      elif [ "$value" == "gi" ]; then
+        compString="Girder"
 
-    elif [ "$value" == "gc" ]; then
-      compString="Gravity Generator Components"
+      elif [ "$value" == "gc" ]; then
+        compString="Gravity Generator Components"
 
-    elif [ "$value" == "ip" ]; then
-      compString="Interior Plate"
+      elif [ "$value" == "ip" ]; then
+        compString="Interior Plate"
 
-    elif [ "$value" == "lt" ]; then
-      compString="Large Steel Tube"
+      elif [ "$value" == "lt" ]; then
+        compString="Large Steel Tube"
 
-    elif [ "$value" == "20" ]; then
-      compString="MR-20 Magazine"
+      elif [ "$value" == "20" ]; then
+        compString="MR-20 Magazine"
 
-    elif [ "$value" == "mc" ]; then
-      compString="Medical Components"
+      elif [ "$value" == "mc" ]; then
+        compString="Medical Components"
 
-    elif [ "$value" == "mg" ]; then
-      compString="Metal Grid"
+      elif [ "$value" == "mg" ]; then
+        compString="Metal Grid"
 
-    elif [ "$value" == "mo" ]; then
-      compString="Motor"
+      elif [ "$value" == "mo" ]; then
+        compString="Motor"
 
-    elif [ "$value" == "pc" ]; then
-      compString="Power Cell"
+      elif [ "$value" == "pc" ]; then
+        compString="Power Cell"
 
-    elif [ "$value" == "rc" ]; then
-      compString="Radio-Communication"
+      elif [ "$value" == "rc" ]; then
+        compString="Radio-Communication"
 
-    elif [ "$value" == "ec" ]; then
-      compString="Reactor Components"
+      elif [ "$value" == "ec" ]; then
+        compString="Reactor Components"
 
-    elif [ "$value" == "st" ]; then
-      compString="Small Steel Tube"
+      elif [ "$value" == "st" ]; then
+        compString="Small Steel Tube"
 
-    elif [ "$value" == "sc" ]; then
-      compString="Solar Cell"
+      elif [ "$value" == "sc" ]; then
+        compString="Solar Cell"
 
-    elif [ "$value" == "sp" ]; then
-      compString="Steel Plate"
+      elif [ "$value" == "sp" ]; then
+        compString="Steel Plate"
 
-    elif [ "$value" == "uc" ]; then
-      compString="Superconductor Component"
+      elif [ "$value" == "uc" ]; then
+        compString="Superconductor Component"
 
-    elif [ "$value" == "tc" ]; then
-      compString="Thruster Components"
+      elif [ "$value" == "tc" ]; then
+        compString="Thruster Components"
 
-    else
-      print-components
-      echo ""
-      echo "[ERROR] UNKNOWN component provided! ($value)"
-      exit
+      else
+        print-components
+        echo ""
+        echo "[ERROR] UNKNOWN component provided! ($value)"
+        exit
+      fi
+
+      # echo "[DEBUG] Processing Component: $compString"
+      outStr="$outStr $compString,"
     fi
 
-    # echo "[DEBUG] Processing Component: $compString"
-    outStr="$outStr $compString,"
 
   else 
     matStr=""
 
-    if [ "$key" == "co" ]; then
-      matStr="Cobalt Ingot" 
+    if [ "$wantsJSONComponent" == "false"  ]; then
+      if [ "$key" == "co" ]; then
+        matStr="Cobalt Ingot" 
 
-    elif [ "$key" == "au" ]; then
-      matStr="Gold Ingot" 
+      elif [ "$key" == "au" ]; then
+        matStr="Gold Ingot" 
 
-    elif [ "$key" == "gravel" ]; then
-      matStr="Gravel"
+      elif [ "$key" == "gravel" ]; then
+        matStr="Gravel"
 
-    elif [ "$key" == "fe" ]; then
-      matStr="Iron Ingot" 
+      elif [ "$key" == "fe" ]; then
+        matStr="Iron Ingot" 
 
-    elif [ "$key" == "mg" ]; then
-      matStr="Magnesium Powder"
+      elif [ "$key" == "mg" ]; then
+        matStr="Magnesium Powder"
 
-    elif [ "$key" == "ni" ]; then
-      matStr="Nickel Ingot" 
+      elif [ "$key" == "ni" ]; then
+        matStr="Nickel Ingot" 
 
-    elif [ "$key" == "pt" ]; then
-      matStr="Platinum Ingot" 
+      elif [ "$key" == "pt" ]; then
+        matStr="Platinum Ingot" 
 
-    elif [ "$key" == "si" ]; then
-      matStr="Silicon Wafer"
+      elif [ "$key" == "si" ]; then
+        matStr="Silicon Wafer"
 
-    elif [ "$key" == "ag" ]; then
-      matStr="Silver Ingot" 
+      elif [ "$key" == "ag" ]; then
+        matStr="Silver Ingot" 
 
-    elif [ "$key" == "u" ]; then
-      matStr="Uranium Ingot"
+      elif [ "$key" == "u" ]; then
+        matStr="Uranium Ingot"
 
-    else
-      print-materials
-      echo ""
-      echo "[ERROR] UNKNOWN material! ($key)"
-      exit
+      else
+        print-materials
+        echo ""
+        echo "[ERROR] UNKNOWN material! ($key)"
+        exit
+      fi
+
+      # echo "[DEBUG] Processing Material: "$matStr
+      outStr="$outStr $matStr, $value,"
+
     fi
-
-    # echo "[DEBUG] Processing Material: "$matStr
-    outStr="$outStr $matStr, $value,"
   fi
 
 
