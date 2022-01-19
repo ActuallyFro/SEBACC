@@ -1,18 +1,16 @@
 #!/bin/bash
 
-# check if $1 is empty, error out
 if [ -z "$1" ]; then
   echo "[ERROR] No STRING provided!"
   exit 1
 fi
 
 loopCounter=0
-#iterate over substring, broken up by comm
 outStr=""
+
 for componentCostStr in $(echo $1 | tr "," "\n"); do
   # echo "[DEBUG] Looking at: $componentCostStr"
 
-  # break componentCostStr into key and value
   key=""
   value=""
   isLoopFirstDone="false"
@@ -36,8 +34,6 @@ for componentCostStr in $(echo $1 | tr "," "\n"); do
 
   #echo "[DEBUG] Key ($key): Value($value)"
 
-  wasComponentProvided="false"
-
   if [ "$loopCounter" == "0" ]; then
     # echo "[DEBUG] Checking material!"
     compString=""
@@ -47,8 +43,6 @@ for componentCostStr in $(echo $1 | tr "," "\n"); do
       exit
     fi
     
-    # wasComponentProvided="true"
-
     #Component Check:
     compStr=""
     if [ "$value" == "bg" ]; then
@@ -62,9 +56,6 @@ for componentCostStr in $(echo $1 | tr "," "\n"); do
     fi
 
     # echo "[DEBUG] Processing Component: $compString"
-
-    # newStr="$outStr $compString,"
-    # outStr="$newStr"
     outStr="$outStr $compString,"
 
   else 
