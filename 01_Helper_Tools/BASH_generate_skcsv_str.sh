@@ -109,14 +109,85 @@ for componentCostStr in $(echo $1 | tr "," "\n"); do
     
     #Component Check:
     compStr=""
-    if [ "$value" == "bg" ]; then
-      compString="Bulletproof Glass" #FIX
+
+    if [ "$value" == "200" ]; then
+      compString="200mm Missile Container"
+
+    elif [ "$value" == "25" ]; then
+      compString="25x184mm NATO Ammo Container"
+
+    elif [ "$value" == "556" ]; then
+      compString="5.56x45mm NATO Magazine"
+
+    elif [ "$value" == "bg" ]; then
+      compString="Bulletproof Glass"
 
     elif [ "$value" == "ca" ]; then
-      compString="Canvas" #FIX
+      compString="Canvas"
 
     elif [ "$value" == "co" ]; then
-      compString="Computer" #FIX
+      compString="Computer"
+
+    elif [ "$value" == "cc" ]; then
+      compString="Construction Component"
+
+    elif [ "$value" == "dc" ]; then
+      compString="Detector Components"
+
+    elif [ "$value" == "di" ]; then
+      compString="Display"
+
+    elif [ "$value" == "ex" ]; then
+      compString="Explosives"
+
+    elif [ "$value" == "gi" ]; then
+      compString="Girder"
+
+    elif [ "$value" == "gc" ]; then
+      compString="Gravity Generator Components"
+
+    elif [ "$value" == "ip" ]; then
+      compString="Interior Plate"
+
+    elif [ "$value" == "lt" ]; then
+      compString="Large Steel Tube"
+
+    elif [ "$value" == "20" ]; then
+      compString="MR-20 Magazine"
+
+    elif [ "$value" == "mc" ]; then
+      compString="Medical Components"
+
+    elif [ "$value" == "mg" ]; then
+      compString="Metal Grid"
+
+    elif [ "$value" == "mo" ]; then
+      compString="Motor"
+
+    elif [ "$value" == "pc" ]; then
+      compString="Power Cell"
+
+    elif [ "$value" == "rc" ]; then
+      compString="Radio-Communication"
+
+    elif [ "$value" == "ec" ]; then
+      compString="Reactor Components"
+
+    elif [ "$value" == "st" ]; then
+      compString="Small Steel Tube"
+
+    elif [ "$value" == "sc" ]; then
+      compString="Solar Cell"
+
+    elif [ "$value" == "sp" ]; then
+      compString="Steel Plate"
+
+    elif [ "$value" == "uc" ]; then
+      compString="Superconductor Component"
+
+    elif [ "$value" == "tc" ]; then
+      compString="Thruster Components"
+
     else
       print-components
       echo ""
@@ -175,6 +246,9 @@ for componentCostStr in $(echo $1 | tr "," "\n"); do
   loopCounter=$((loopCounter + 1))
 
 done
+
+#remove last comma
+outStr=${outStr%?}
 
 echo "RECCOMEND: "
 echo "$outStr"
