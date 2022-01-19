@@ -7,7 +7,46 @@ function print-help() {
 }
 
 function print-components(){
-  echo "TODO - PRINT LIST OF COMPONENTS"
+  echo "200 - 200mm Missile Container"
+  echo "25 - 25x184mm NATO Ammo Container"
+  echo "556 - 5.56x45mm NATO Magazine"
+  echo "bg - Bulletproof Glass"
+  echo "ca - Canvas"
+  echo "co - Computer"
+  echo "cc - Construction Component"
+  echo "dc - Detector Components"
+  echo "di - Display"
+  echo "ex - Explosives"
+  echo "gi - Girder"
+  echo "gc - Gravity Generator Components"
+  echo "ip - Interior Plate"
+  echo "lt - Large Steel Tube"
+  echo "20 - MR-20 Magazine"
+  echo "mc - Medical Components"
+  echo "mg - Metal Grid"
+  echo "mo - Motor"
+  echo "pc - Power Cell"
+  echo "rc - Radio-Communication"
+  echo "ec - Reactor Components"
+  echo "st - Small Steel Tube"
+  echo "sc - Solar Cell"
+  echo "sp - Steel Plate"
+  echo "uc - Superconductor Component"
+  echo "tc - Thruster Components"
+}
+
+function print-ores(){
+  echo "Cobalt Ore"
+  echo "Gold Ore"
+  echo "Iron Ore"
+  echo "Magnesium Ore"
+  echo "Nickel Ore"
+  echo "Platinum Ore"
+  echo "Silicon Ore"
+  echo "Silver Ore"
+  echo "Gravel"
+  echo "Stone"
+  echo "Uranium Ore"
 }
 
 function print-materials(){
