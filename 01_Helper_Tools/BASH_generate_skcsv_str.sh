@@ -36,41 +36,76 @@ for componentCostStr in $(echo $1 | tr "," "\n"); do
 
   #echo "[DEBUG] Key ($key): Value($value)"
 
+  wasComponentProvided="false"
+
   if [ "$loopCounter" == "0" ]; then
-    echo "[DEBUG] Checking material!"
+    # echo "[DEBUG] Checking material!"
     compString=""
 
-    if [ "$key" != "m" ]; then
-      echo "[WARNING] No material provided!"
+    if [ "$key" != "c" ]; then
+      echo "[ERROR] No component provided!"
+      exit
     fi
+    
+    # wasComponentProvided="true"
 
-    #Material Check:
+    #Component Check:
+    compStr=""
     if [ "$value" == "bg" ]; then
-      echo "[DEBUG] Processing Bulletproof Glass"
       compString="Bulletproof Glass" #FIX
 
     elif [ "$value" == "ca" ]; then
-      echo "[DEBUG] Processing Canvas"
       compString="Canvas" #FIX
 
     elif [ "$value" == "co" ]; then
-      echo "[DEBUG] Processing Computer"
       compString="Computer" #FIX
-
     fi
 
-    newStr="$outStr $compString,"
-    outStr="$newStr"
+    # echo "[DEBUG] Processing Component: $compString"
+
+    # newStr="$outStr $compString,"
+    # outStr="$newStr"
+    outStr="$outStr $compString,"
 
   else 
-    if [ "$key" != "i" ]; then
-      echo "[DEBUG] Processing Iron"
+    matStr=""
 
-    elif [ "$key" != "s" ]; then
-      echo "[DEBUG] Processing Silcon"
+    if [ "$key" == "co" ]; then
+      matStr="Cobalt Ingot" 
 
+    elif [ "$key" == "au" ]; then
+      matStr="Gold Ingot" 
+
+    elif [ "$key" == "gravel" ]; then
+      matStr="Gravel"
+
+    elif [ "$key" == "fe" ]; then
+      matStr="Iron Ingot" 
+
+    elif [ "$key" == "mg" ]; then
+      matStr="Magnesium Powder"
+
+    elif [ "$key" == "ni" ]; then
+      matStr="Nickel Ingot" 
+
+    elif [ "$key" == "pt" ]; then
+      matStr="Platinum Ingot" 
+
+    elif [ "$key" == "si" ]; then
+      matStr="Silicon Wafer"
+
+    elif [ "$key" == "ag" ]; then
+      matStr="Silver Ingot" 
+
+    elif [ "$key" == "u" ]; then
+      matStr="Uranium Ingot"
+    else
+      echo "[ERROR] Unknown material! ($key)"
+      exit
     fi
 
+    # echo "[DEBUG] Processing Material: "$matStr
+    outStr="$outStr $matStr, $value,"
   fi
 
 
