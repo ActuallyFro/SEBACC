@@ -204,53 +204,165 @@ for componentCostStr in $(echo $1 | tr "," "\n"); do
 
       # echo "[DEBUG] Processing Component: $compString"
       outStr="$outStr $compString,"
+
+    else
+      if [ "$value" == "200" ]; then
+        compString="200mm Missile Container"
+
+      elif [ "$value" == "25" ]; then
+        compString="25x184mm NATO Ammo Container"
+
+      elif [ "$value" == "556" ]; then
+        compString="5.56x45mm NATO Magazine"
+
+      elif [ "$value" == "bg" ]; then
+        compString="BulletproofGlass"
+
+      elif [ "$value" == "ca" ]; then
+        compString="Canvas"
+
+      elif [ "$value" == "co" ]; then
+        compString="Computer"
+
+      elif [ "$value" == "cc" ]; then
+        compString="Construction"
+
+      elif [ "$value" == "dc" ]; then
+        compString="Detector"
+
+      elif [ "$value" == "di" ]; then
+        compString="Display"
+
+      elif [ "$value" == "ex" ]; then
+        compString="Explosives"
+
+      elif [ "$value" == "gi" ]; then
+        compString="Girder"
+
+      elif [ "$value" == "gc" ]; then
+        compString="GravityGenerator"
+
+      elif [ "$value" == "ip" ]; then
+        compString="InteriorPlate"
+
+      elif [ "$value" == "lt" ]; then
+        compString="LargeTube"
+
+      elif [ "$value" == "20" ]; then
+        compString="MR-20 Magazine"
+
+      elif [ "$value" == "mc" ]; then
+        compString="Medical"
+
+      elif [ "$value" == "mg" ]; then
+        compString="MetalGrid"
+
+      elif [ "$value" == "mo" ]; then
+        compString="Motor"
+
+      elif [ "$value" == "pc" ]; then
+        compString="PowerCell"
+
+      elif [ "$value" == "rc" ]; then
+        compString="RadioCommunication"
+
+      elif [ "$value" == "ec" ]; then
+        compString="Reactor"
+
+      elif [ "$value" == "st" ]; then
+        compString="SmallTube"
+
+      elif [ "$value" == "sc" ]; then
+        compString="SolarCell"
+
+      elif [ "$value" == "sp" ]; then
+        compString="SteelPlate"
+
+      elif [ "$value" == "uc" ]; then
+        compString="Superconductor"
+
+      elif [ "$value" == "tc" ]; then
+        compString="Thruster"
+
+      #???ZoneChip
+
+      else
+        print-components
+        echo ""
+        echo "[ERROR] UNKNOWN component provided! ($value)"
+        exit
+      fi
+
+      # echo "[DEBUG] Processing Component: $compString"
+      outStr="$outStr "
+      outStr="$outStr \"$compString\":{\n"
+      outStr="$outStr \"Cost\":{\n"
+
+      echo "[DEBUG] ======================"
+      echo -e $outStr
+
+
+      #   "Construction": {
+      #   "IconPath": "Textures\\GUI\\Icons\\component\\construction_components_component.dds",
+      #   "Cost": {
+      #     "Iron Ingot": 2.66666675
+      #   }
+      # },
     fi
 
 
   else 
     matStr=""
 
+    if [ "$key" == "co" ]; then
+      matStr="Cobalt Ingot" 
+
+    elif [ "$key" == "au" ]; then
+      matStr="Gold Ingot" 
+
+    elif [ "$key" == "gravel" ]; then
+      matStr="Gravel"
+
+    elif [ "$key" == "fe" ]; then
+      matStr="Iron Ingot" 
+
+    elif [ "$key" == "mg" ]; then
+      matStr="Magnesium Powder"
+
+    elif [ "$key" == "ni" ]; then
+      matStr="Nickel Ingot" 
+
+    elif [ "$key" == "pt" ]; then
+      matStr="Platinum Ingot" 
+
+    elif [ "$key" == "si" ]; then
+      matStr="Silicon Wafer"
+
+    elif [ "$key" == "ag" ]; then
+      matStr="Silver Ingot" 
+
+    elif [ "$key" == "u" ]; then
+      matStr="Uranium Ingot"
+
+    else
+      print-materials
+      echo ""
+      echo "[ERROR] UNKNOWN material! ($key)"
+      exit
+    fi
+
+    # if $value does NOT contain a '.', then append ".0"
+    if [[ $value != *"."* ]]; then
+      value="$value.0"
+    fi
+
     if [ "$wantsJSONComponent" == "false"  ]; then
-      if [ "$key" == "co" ]; then
-        matStr="Cobalt Ingot" 
-
-      elif [ "$key" == "au" ]; then
-        matStr="Gold Ingot" 
-
-      elif [ "$key" == "gravel" ]; then
-        matStr="Gravel"
-
-      elif [ "$key" == "fe" ]; then
-        matStr="Iron Ingot" 
-
-      elif [ "$key" == "mg" ]; then
-        matStr="Magnesium Powder"
-
-      elif [ "$key" == "ni" ]; then
-        matStr="Nickel Ingot" 
-
-      elif [ "$key" == "pt" ]; then
-        matStr="Platinum Ingot" 
-
-      elif [ "$key" == "si" ]; then
-        matStr="Silicon Wafer"
-
-      elif [ "$key" == "ag" ]; then
-        matStr="Silver Ingot" 
-
-      elif [ "$key" == "u" ]; then
-        matStr="Uranium Ingot"
-
-      else
-        print-materials
-        echo ""
-        echo "[ERROR] UNKNOWN material! ($key)"
-        exit
-      fi
-
       # echo "[DEBUG] Processing Material: "$matStr
       outStr="$outStr $matStr, $value,"
-
+    else
+      # "Iron Ingot": 2.66666675
+      echo "[DEBUG] Processing Material: "$matStr
+      outStr="$outStr    \"$matStr\": $value,\n"
     fi
   fi
 
@@ -259,8 +371,19 @@ for componentCostStr in $(echo $1 | tr "," "\n"); do
 
 done
 
-#remove last comma
-outStr=${outStr%?}
+if [ "$wantsJSONComponent" == "false"  ]; then
+  #remove last comma
+  outStr=${outStr%?}
+else
+  # #remove last line return
+  outStr=${outStr%?}
+  outStr=${outStr%?}
+  #remove last comma
+  outStr=${outStr%?}
+  outStr="$outStr \n       }\n"
+  outStr="$outStr      },"  
+fi
 
-echo "RECCOMEND: "
-echo "$outStr"
+echo "RECCOMEND:"
+echo -e $outStr
+# echo "$outStr"
