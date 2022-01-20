@@ -297,17 +297,6 @@ for componentCostStr in $(echo $1 | tr "," "\n"); do
       outStr="$outStr "
       outStr="$outStr \"$compString\":{\n"
       outStr="$outStr \"Cost\":{\n"
-
-      echo "[DEBUG] ======================"
-      echo -e $outStr
-
-
-      #   "Construction": {
-      #   "IconPath": "Textures\\GUI\\Icons\\component\\construction_components_component.dds",
-      #   "Cost": {
-      #     "Iron Ingot": 2.66666675
-      #   }
-      # },
     fi
 
 
@@ -351,17 +340,13 @@ for componentCostStr in $(echo $1 | tr "," "\n"); do
       exit
     fi
 
-    # if $value does NOT contain a '.', then append ".0"
     if [[ $value != *"."* ]]; then
       value="$value.0"
     fi
 
     if [ "$wantsJSONComponent" == "false"  ]; then
-      # echo "[DEBUG] Processing Material: "$matStr
       outStr="$outStr $matStr, $value,"
     else
-      # "Iron Ingot": 2.66666675
-      echo "[DEBUG] Processing Material: "$matStr
       outStr="$outStr    \"$matStr\": $value,\n"
     fi
   fi
@@ -384,6 +369,4 @@ else
   outStr="$outStr      },"  
 fi
 
-echo "RECCOMEND:"
 echo -e $outStr
-# echo "$outStr"
