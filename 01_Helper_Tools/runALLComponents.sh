@@ -1,19 +1,21 @@
 #!/bin/bash
 
+#source: https://www.spaceengineerswiki.com/Category:Components
+
 #Bulletproof Glass
-./BASH_generate_skcsv_str.sh "jc;bg,fe;12,ni;0"
+./BASH_generate_skcsv_str.sh "jc;bg,si;15"
 
 #Canvas
-./BASH_generate_skcsv_str.sh "jc;ca,co;0,au;0,gravel;0,fe;0,mg;0,ni;0,pt;0,si;0,ag;0,u;0"
+./BASH_generate_skcsv_str.sh "jc;ca,fe;2,si;35"
 
 #Computer
-./BASH_generate_skcsv_str.sh "jc;co,co;0,au;0,gravel;0,fe;0,mg;0,ni;0,pt;0,si;0,ag;0,u;0"
+./BASH_generate_skcsv_str.sh "jc;co,fe;0.5,si;0.2"
 
 #Construction Component
-./BASH_generate_skcsv_str.sh "jc;cc,co;0,au;0,gravel;0,fe;0,mg;0,ni;0,pt;0,si;0,ag;0,u;0"
+./BASH_generate_skcsv_str.sh "jc;cc,fe;8"
 
 #Detector Components
-./BASH_generate_skcsv_str.sh "jc;dc,co;0,au;0,gravel;0,fe;0,mg;0,ni;0,pt;0,si;0,ag;0,u;0"
+./BASH_generate_skcsv_str.sh "jc;dc,fe;5,,ni;15"
 
 #Display
 ./BASH_generate_skcsv_str.sh "jc;di,co;0,au;0,gravel;0,fe;0,mg;0,ni;0,pt;0,si;0,ag;0,u;0"
@@ -37,7 +39,7 @@
 ./BASH_generate_skcsv_str.sh "jc;mc,co;0,au;0,gravel;0,fe;0,mg;0,ni;0,pt;0,si;0,ag;0,u;0"
 
 #Metal Grid
-./BASH_generate_skcsv_str.sh "jc;mg,co;0,au;0,gravel;0,fe;0,mg;0,ni;0,pt;0,si;0,ag;0,u;0"
+./BASH_generate_skcsv_str.sh "jc;mg,co;3,fe;12,ni;5"
 
 #Motor
 ./BASH_generate_skcsv_str.sh "jc;mo,co;0,au;0,gravel;0,fe;0,mg;0,ni;0,pt;0,si;0,ag;0,u;0"
