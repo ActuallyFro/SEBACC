@@ -1,7 +1,8 @@
 #!/bin/bash
 
-#source: https://www.spaceengineerswiki.com/Category:Components
+echo "{"
 
+#source: https://www.spaceengineerswiki.com/Category:Components
 #Bulletproof Glass
 ./BASH_generate_skcsv_str.sh "jc;bg,si;15"
 
@@ -66,6 +67,7 @@
 ./BASH_generate_skcsv_str.sh "jc;uc,au;2,fe;10"
 
 #Thruster Components
-./BASH_generate_skcsv_str.sh "jc;tc,co;10,au;1,fe;30,pt;0.4"
-
-
+finalStr=`./BASH_generate_skcsv_str.sh "jc;tc,co;10,au;1,fe;30,pt;0.4"`
+finalStr=${finalStr%?}
+echo "$finalStr"
+echo "}"
