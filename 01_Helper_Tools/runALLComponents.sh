@@ -4,70 +4,70 @@ echo "{"
 
 #source: https://www.spaceengineerswiki.com/Category:Components
 #Bulletproof Glass
-./BASH_generate_skcsv_str.sh "jc;bg,si;15"
+./BASH_generate_skcsv_str.sh "jc;bg,si;5"
 
 #Canvas
-./BASH_generate_skcsv_str.sh "jc;ca,fe;2,si;35"
+./BASH_generate_skcsv_str.sh "jc;ca,fe;0.67,si;11.67"
 
 #Computer
-./BASH_generate_skcsv_str.sh "jc;co,fe;0.5,si;0.2"
+./BASH_generate_skcsv_str.sh "jc;co,fe;0.17,si;0.07"
 
 #Construction Component
-./BASH_generate_skcsv_str.sh "jc;cc,fe;8"
+./BASH_generate_skcsv_str.sh "jc;cc,fe;2.67"
 
 #Detector Components
-./BASH_generate_skcsv_str.sh "jc;dc,fe;5,ni;15"
+./BASH_generate_skcsv_str.sh "jc;dc,fe;1.67,ni;5"
 
 #Display
-./BASH_generate_skcsv_str.sh "jc;di,fe;1,si;5"
+./BASH_generate_skcsv_str.sh "jc;di,fe;0.33,si;1.67"
 
 #Explosives
-./BASH_generate_skcsv_str.sh "jc;ex,mg;2,si;0.5"
+./BASH_generate_skcsv_str.sh "jc;ex,mg;0.67,si;0.17"
 
 #Girder
-./BASH_generate_skcsv_str.sh "jc;gi,fe;6"
+./BASH_generate_skcsv_str.sh "jc;gi,fe;2.0"
 
 #Gravity Generator Components
-./BASH_generate_skcsv_str.sh "jc;gc,co;2200,au;10,fe;600,ag;5"
+./BASH_generate_skcsv_str.sh "jc;gc,co;73.33,au;3.33,fe;200,ag;1.67"
 
 #Interior Plate
-./BASH_generate_skcsv_str.sh "jc;ip,fe;3"
+./BASH_generate_skcsv_str.sh "jc;ip,fe;1"
 
 #Large Steel Tube
-./BASH_generate_skcsv_str.sh "jc;lt,fe;30"
+./BASH_generate_skcsv_str.sh "jc;lt,fe;10"
 
 #Medical Components
-./BASH_generate_skcsv_str.sh "jc;mc,fe;60,ni;70,ag;20"
+./BASH_generate_skcsv_str.sh "jc;mc,fe;20,ni;23.33,ag;6.67"
 
 #Metal Grid
-./BASH_generate_skcsv_str.sh "jc;mg,co;3,fe;12,ni;5"
+./BASH_generate_skcsv_str.sh "jc;mg,co;1,fe;4,ni;1.67"
 
 #Motor
-./BASH_generate_skcsv_str.sh "jc;mo,fe;20,ni;5"
+./BASH_generate_skcsv_str.sh "jc;mo,fe;6.67,ni;1.67"
 
 #Power Cell
-./BASH_generate_skcsv_str.sh "jc;pc,fe;10,ni;2,si;1"
+./BASH_generate_skcsv_str.sh "jc;pc,fe;3.33,ni;0.67,si;0.33"
 
 #Radio-Communication
-./BASH_generate_skcsv_str.sh "jc;rc,fe;8,si;1"
+./BASH_generate_skcsv_str.sh "jc;rc,fe;2.67,si;0.33"
 
 #Reactor Components
-./BASH_generate_skcsv_str.sh "jc;ec,gravel;20,fe;15,,ag;5"
+./BASH_generate_skcsv_str.sh "jc;ec,gravel;6.67,fe;5,ag;1.67"
 
 #Small Steel Tube
-./BASH_generate_skcsv_str.sh "jc;st,fe;5"
+./BASH_generate_skcsv_str.sh "jc;st,fe;1.67"
 
 #Solar Cell
-./BASH_generate_skcsv_str.sh "jc;sc,ni;3,si;6"
+./BASH_generate_skcsv_str.sh "jc;sc,ni;1.0,si;2.0"
 
 #Steel Plate
-./BASH_generate_skcsv_str.sh "jc;sp,fe;21"
+./BASH_generate_skcsv_str.sh "jc;sp,fe;7"
 
 #Superconductor Component
-./BASH_generate_skcsv_str.sh "jc;uc,au;2,fe;10"
+./BASH_generate_skcsv_str.sh "jc;uc,au;0.67,fe;3.33"
 
 #Thruster Components
-finalStr=`./BASH_generate_skcsv_str.sh "jc;tc,co;10,au;1,fe;30,pt;0.4"`
+finalStr=`./BASH_generate_skcsv_str.sh "jc;tc,co;3.33,au;0.33,fe;10,pt;0.13"`
 finalStr=${finalStr%?}
 echo "$finalStr"
 echo "}"
