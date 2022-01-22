@@ -57,11 +57,13 @@
             TotalBlocks++;
 
             //Block Checks
-            console.log("=================\nFOUND BLOCK!: "+ keyBlock);
+            // console.log("=================\nFOUND BLOCK!: "+ keyBlock);
             if (!BlocksCount.has(keyBlock)) {
               BlocksCount.set(keyBlock, 0);
-              console.log("[WARNING] Adding NEW BLOCK: " + keyBlock);
+              // console.log("[WARNING] Adding NEW BLOCK: " + keyBlock);
             }
+
+            console.log("[WARNING] Adding BLOCK: " + keyBlock);
             BlocksCount.set(keyBlock, BlocksCount.get(keyBlock) + 1);
 
             //Component Checks
@@ -71,7 +73,7 @@
               //check if map value exists, if not set to 0
               if (!BlockCosts.has(keyCost)) {
                 BlockCosts.set(keyCost, 0);
-                console.log("[WARNING] Adding NEW material: " + keyCost);
+                // console.log("[WARNING] Adding NEW material: " + keyCost );
               }
 
               TotalComponents+=componentCost;
@@ -83,26 +85,26 @@
               $.each(jsonDataMaterials, function(keyMat, materialData) {
                 //COPILOT
                 if (keyCost == keyMat) {
-                  console.log("[DEBUG] Found materials for component("+keyMat+")! ..getting costs");
+                  // console.log("[DEBUG] Found materials for component("+keyCost+")! ..getting costs (componentCost: " + componentCost +")");
 
                   var IngotCosts = materialData.Cost;
                   $.each(IngotCosts, function(keyCostMats, materialCost) {
-                    TotalMaterials+=materialCost;
-                    console.log("[DEBUG] Found materials cost for:"+keyCostMats);
+                    TotalMaterials+=(materialCost*componentCost);
+                    // console.log("[DEBUG] Found materials cost for:"+keyCostMats );
                   //   //check if map value exists, if not set to 0
                     if (!BlockMaterials.has(keyCostMats)) {
                       BlockMaterials.set(keyCostMats, 0);
-                      console.log("[WARNING] Adding NEW material: " + keyCostMats);
+                      // console.log("[WARNING] Adding NEW material: " + keyCostMats);
                     }
 
                     //increment BlockCosts by val
 
-                    BlockMaterials.set(keyCostMats, BlockMaterials.get(keyCostMats) + materialCost);
+                    BlockMaterials.set(keyCostMats, BlockMaterials.get(keyCostMats) + materialCost*componentCost);
                     //Calculation, Bug hunting...:
                     // console.log("[DEBUG] MATH: adding '" + materialCost +"' to '"+keyCostMats*3/2+"'");
 
                     BlockMaterials.set(keyCostMats, BlockMaterials.get(keyCostMats));
-                    console.log("[DEBUG] MATH: adding '" + materialCost);
+                    console.log("[DEBUG] MATH: adding '" + materialCost + " * " + componentCost + "': " + (materialCost*componentCost) + " to '" + keyCostMats + "' (tot: " + BlockMaterials.get(keyCostMats) + ")");
                   });
 
                 }
