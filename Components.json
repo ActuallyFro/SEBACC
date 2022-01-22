@@ -1,135 +1,135 @@
 {
 "BulletproofGlass":{
  "Cost":{
- "Silicon Wafer": 15.0 
+ "Silicon Wafer": 5.0 
  }
  },
 "Canvas":{
  "Cost":{
- "Iron Ingot": 2.0,
- "Silicon Wafer": 35.0 
+ "Iron Ingot": 0.67,
+ "Silicon Wafer": 11.67 
  }
  },
 "Computer":{
  "Cost":{
- "Iron Ingot": 0.5,
- "Silicon Wafer": 0.2 
+ "Iron Ingot": 0.17,
+ "Silicon Wafer": 0.07 
  }
  },
 "Construction":{
  "Cost":{
- "Iron Ingot": 8.0 
+ "Iron Ingot": 2.67 
  }
  },
 "Detector":{
  "Cost":{
- "Iron Ingot": 5.0,
- "Nickel Ingot": 15.0 
+ "Iron Ingot": 1.67,
+ "Nickel Ingot": 5.0 
  }
  },
 "Display":{
  "Cost":{
- "Iron Ingot": 1.0,
- "Silicon Wafer": 5.0 
+ "Iron Ingot": 0.33,
+ "Silicon Wafer": 1.67 
  }
  },
 "Explosives":{
  "Cost":{
- "Magnesium Powder": 2.0,
- "Silicon Wafer": 0.5 
+ "Magnesium Powder": 0.67,
+ "Silicon Wafer": 0.17 
  }
  },
 "Girder":{
  "Cost":{
- "Iron Ingot": 6.0 
+ "Iron Ingot": 2.0 
  }
  },
 "GravityGenerator":{
  "Cost":{
- "Cobalt Ingot": 2200.0,
- "Gold Ingot": 10.0,
- "Iron Ingot": 600.0,
- "Silver Ingot": 5.0 
+ "Cobalt Ingot": 73.33,
+ "Gold Ingot": 3.33,
+ "Iron Ingot": 200.0,
+ "Silver Ingot": 1.67 
  }
  },
 "InteriorPlate":{
  "Cost":{
- "Iron Ingot": 3.0 
+ "Iron Ingot": 1.0 
  }
  },
 "LargeTube":{
  "Cost":{
- "Iron Ingot": 30.0 
+ "Iron Ingot": 10.0 
  }
  },
 "Medical":{
  "Cost":{
- "Iron Ingot": 60.0,
- "Nickel Ingot": 70.0,
- "Silver Ingot": 20.0 
+ "Iron Ingot": 20.0,
+ "Nickel Ingot": 23.33,
+ "Silver Ingot": 6.67 
  }
  },
 "MetalGrid":{
  "Cost":{
- "Cobalt Ingot": 3.0,
- "Iron Ingot": 12.0,
- "Nickel Ingot": 5.0 
+ "Cobalt Ingot": 1.0,
+ "Iron Ingot": 4.0,
+ "Nickel Ingot": 1.67 
  }
  },
 "Motor":{
  "Cost":{
- "Iron Ingot": 20.0,
- "Nickel Ingot": 5.0 
+ "Iron Ingot": 6.67,
+ "Nickel Ingot": 1.67 
  }
  },
 "PowerCell":{
  "Cost":{
- "Iron Ingot": 10.0,
- "Nickel Ingot": 2.0,
- "Silicon Wafer": 1.0 
+ "Iron Ingot": 3.33,
+ "Nickel Ingot": 0.67,
+ "Silicon Wafer": 0.33 
  }
  },
 "RadioCommunication":{
  "Cost":{
- "Iron Ingot": 8.0,
- "Silicon Wafer": 1.0 
+ "Iron Ingot": 2.67,
+ "Silicon Wafer": 0.33 
  }
  },
 "Reactor":{
  "Cost":{
- "Gravel": 20.0,
- "Iron Ingot": 15.0,
- "Silver Ingot": 5.0 
+ "Gravel": 6.67,
+ "Iron Ingot": 5.0,
+ "Silver Ingot": 1.67 
  }
  },
 "SmallTube":{
  "Cost":{
- "Iron Ingot": 5.0 
+ "Iron Ingot": 1.67 
  }
  },
 "SolarCell":{
  "Cost":{
- "Nickel Ingot": 3.0,
- "Silicon Wafer": 6.0 
+ "Nickel Ingot": 1.0,
+ "Silicon Wafer": 2.0 
  }
  },
 "SteelPlate":{
  "Cost":{
- "Iron Ingot": 21.0 
+ "Iron Ingot": 7.0 
  }
  },
 "Superconductor":{
  "Cost":{
- "Gold Ingot": 2.0,
- "Iron Ingot": 10.0 
+ "Gold Ingot": 0.67,
+ "Iron Ingot": 3.33 
  }
  },
 "Thruster":{
  "Cost":{
- "Cobalt Ingot": 10.0,
- "Gold Ingot": 1.0,
- "Iron Ingot": 30.0,
- "Platinum Ingot": 0.4 
+ "Cobalt Ingot": 3.33,
+ "Gold Ingot": 0.33,
+ "Iron Ingot": 10.0,
+ "Platinum Ingot": 0.13 
  }
  }
 }
