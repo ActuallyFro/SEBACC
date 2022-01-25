@@ -45,7 +45,8 @@ fi
 
 echo "[BPD] [INFO] Downloading BluePrint Mod <$BluePrintModNumber>"
 combinedURL="$downloadURL$BluePrintModNumber$keyAppend$key" 
-echo "[BPD] [INFO] URL: $combinedURL"
+combinedURLHidden="$downloadURL$BluePrintModNumber$keyAppend[HIDDEN]" 
+echo "[BPD] [INFO] URL: $combinedURLHidden"
 
 #curl file save as $BluePrintModNumber.html
 #if file does not exist, run curl
@@ -56,3 +57,8 @@ if [ ! -f "$BluePrintModNumber.html" ]; then
 else
     echo "[BPD] [WARN] File already exists, skipping download..."
 fi
+
+zipURL=$(cat "$BluePrintModNumber.html" | tr -d "\"" | tr "," "\n" | grep https | sed "s/url:/\n/g" | grep http | tr -d "\\")
+echo "[BPD] [INFO] ZIP URL: $zipURL"
+echo "[BPD] [INFO] File does not exist, downloading..."
+curl -s "$combinedURL" > "$BluePrintModNumber.html"
