@@ -1,6 +1,24 @@
 #!/bin/bash
 
+#save variable $header from HEREDOC string
+header=$(cat <<HEREDOC
+[BPD] BluePrint Downloader
+==========================
+Version: 0.0.1
+
+
+HEREDOC
+)
+
+
+
 keyFile="BLOCKED_Key"
+key=$(cat $keyFile)
+downloadURL="https://api.mod.io/v1/games/264/mods/"
+keyAppend="/files?api_key="
+
+echo "$header"
+echo ""
 
 if [ ! -f "$keyFile" ]; then
     echo "[BPD] [ERROR] you need to SAVE your Mod.io API key; It does NOT exist, creating file 'BLOCKED_Key'"
@@ -18,3 +36,23 @@ if [ ! -s "$keyFile" ]; then
     exit 1
 fi
 
+BluePrintModNumber="$1"
+#check if BluePrintModNumber is a number
+if [ -z "$BluePrintModNumber" ] || [ "$BluePrintModNumber" -eq 0 ]; then
+    echo "[BPD] [ERROR] You need to specify a Mod Number!"
+    exit 1
+fi
+
+echo "[BPD] [INFO] Downloading BluePrint Mod <$BluePrintModNumber>"
+combinedURL="$downloadURL$BluePrintModNumber$keyAppend$key" 
+echo "[BPD] [INFO] URL: $combinedURL"
+
+#curl file save as $BluePrintModNumber.html
+#if file does not exist, run curl
+if [ ! -f "$BluePrintModNumber.html" ]; then
+    echo "[BPD] [INFO] File does not exist, downloading..."
+    curl -s "$combinedURL" > "$BluePrintModNumber.html"
+    echo "[BPD] [INFO] File downloaded!"
+else
+    echo "[BPD] [WARN] File already exists, skipping download..."
+fi
