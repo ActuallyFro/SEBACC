@@ -58,7 +58,7 @@ else
     echo "[BPD] [WARN] File already exists, skipping download..."
 fi
 
-zipURL=$(cat "$BluePrintModNumber.html" | tr -d "\"" | tr "," "\n" | grep https | sed "s/url:/\n/g" | grep http | tr -d "\\")
+zipURL=$(cat "$BluePrintModNumber.html" | tr -d "\"" | tr "," "\n" | grep https | sed "s/url:/\n/g" | grep http | tr -d '\\')
 echo "[BPD] [INFO] ZIP URL: $zipURL"
 
 if [ ! -f "$BluePrintModNumber.zip" ]; then
