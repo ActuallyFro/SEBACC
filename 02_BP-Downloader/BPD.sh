@@ -40,6 +40,7 @@ BluePrintModNumber="$1"
 #check if BluePrintModNumber is a number
 if [ -z "$BluePrintModNumber" ] || [ "$BluePrintModNumber" -eq 0 ]; then
     echo "[BPD] [ERROR] You need to specify a Mod Number!"
+
     exit 1
 fi
 
@@ -67,3 +68,12 @@ if [ ! -f "$BluePrintModNumber.zip" ]; then
 else
     echo "[BPD] [WARN] File already exists, skipping download..."
 fi 
+
+if [ ! -s "$BluePrintModNumber.zip" ]; then
+    echo "[BPD] [ERROR] Zipfile is EMPTY!!!"
+    echo ""
+    echo "Delete it and the mod's html file and try again; or run $0 --clean"
+    exit 1
+else
+    echo "[BPD] [INFO] File downloaded!"
+fi
