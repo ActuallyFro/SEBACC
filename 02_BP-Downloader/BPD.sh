@@ -39,8 +39,12 @@ fi
 #rm zip and html files if "--clean" is set
 if [ "$1" == "--clean" ]; then
     echo "[BPD] [INFO] Cleaning up old files..."
-    rm *.zip
-    rm *.html
+    rm -f *.zip
+    rm -f *.html
+    # rm -f *.sbc
+    rm -f *.sbcB5
+    rm -f *.mod
+    rm -f *.png
     echo "[BPD] [INFO] Done!"
     exit
 fi
@@ -75,10 +79,10 @@ echo "[BPD] [INFO] ZIP URL: $zipURL"
 
 if [ ! -f "$BluePrintModNumber.zip" ]; then
     echo "[BPD] [INFO] File does not exist, downloading..."
-    curl -s "$zipURL" > "$BluePrintModNumber.zip"
+    curl -sL "$zipURL" > "$BluePrintModNumber.zip"
 else
     echo "[BPD] [WARN] File already exists, skipping download..."
-fi 
+fi
 
 if [ ! -s "$BluePrintModNumber.zip" ]; then
     echo "[BPD] [ERROR] Zipfile is EMPTY!!!"
@@ -88,3 +92,24 @@ if [ ! -s "$BluePrintModNumber.zip" ]; then
 else
     echo "[BPD] [INFO] File downloaded!"
 fi
+
+unzip -f -j "$BluePrintModNumber.zip" "bp.sbc" && mv "bp.sbc" "bp_$BluePrintModNumber.sbc"
+
+if [ ! -f "bp_$BluePrintModNumber.sbc" ]; then
+    echo "[BPD] [ERROR] SBC file does not exist!!!"
+    echo ""
+    echo "Check the html and zip file to determine if your key was valid or if the zip downloaded..."
+    exit 1
+fi
+
+if [ ! -s "bp_$BluePrintModNumber.sbc" ]; then
+    echo "[BPD] [ERROR] SBC file is EMPTY!!!"
+    echo ""
+    echo "Check the html and zip file to determine if your key was valid or if the zip downloaded..."
+    exit 1
+fi
+
+echo "[BPD] [INFO] Blue Print for mod ($BluePrintModNumber) downloaded!"
+
+rm -f *.html
+rm -f *.zip
