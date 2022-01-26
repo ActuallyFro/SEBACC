@@ -4,7 +4,7 @@
 header=$(cat <<HEREDOC
 [BPD] BluePrint Downloader
 ==========================
-Version: 0.0.1
+Version: 1.0.0
 
 
 HEREDOC
@@ -93,7 +93,7 @@ else
     echo "[BPD] [INFO] File downloaded!"
 fi
 
-unzip -f -j "$BluePrintModNumber.zip" "bp.sbc" > /dev/null 2>&1
+unzip -j "$BluePrintModNumber.zip" "bp.sbc" > /dev/null 2>&1
 mv "bp.sbc" "bp_$BluePrintModNumber.sbc" > /dev/null 2>&1
 
 if [ ! -f "bp_$BluePrintModNumber.sbc" ]; then
@@ -110,14 +110,15 @@ if [ ! -s "bp_$BluePrintModNumber.sbc" ]; then
     exit 1
 fi
 
-firstTwo=$(cat "bp_$BluePrintModNumber.sbc" | grep "DisplayName" | head -n 2)
+# firstTwo=$(cat "bp_$BluePrintModNumber.sbc" | grep "DisplayName" | head -n 2)
+firstTwo=$(cat "bp_$BluePrintModNumber.sbc" | grep "DisplayName" | sed -e 1b -e '$!d')
 
 loop="1"
 user="hello"
 modName="hi"
 
 while read -r line; do
-    temp=`echo "$line" | sed "s/<DisplayName>//g" | sed "s/<\/DisplayName>//g" | sed 's/^ *//g' | sed 's/ *$//g' | tr -dc '[:alnum:] '`
+    temp=`echo "$line" | sed "s/<DisplayName>//g" | sed "s/<\/DisplayName>//g" | sed 's/^ *//g' | sed 's/ *$//g' | tr -dc '[:alnum:] -_.'`
     # echo "[BPD] [DEBUG] '$temp'"
     if [[ "$loop" == "1" ]]; then
         # echo "[BPD] [DEBUG] Saving user name... $temp"
@@ -130,8 +131,9 @@ while read -r line; do
 
     loop=$((loop+1))
 done <<< "$(echo -e "$firstTwo")"
-
-echo "[BPD] [INFO] Blue Print for mod '$modName' by '$user' (ID: $BluePrintModNumber) downloaded!"
-
-rm -f *.html
-rm -f *.zip
+echo "==========================" 
+echo "[BPD]Blue Print '$modName' by '$user' (ID: $BluePrintModNumber) downloaded!"
+echo ""
+echo "Published by:"; echo "-------------" ; cat "bp_$BluePrintModNumber".sbc | grep DisplayName | sed "s/<DisplayName>//g" | sed "s/<\/DisplayName>//g"; echo "History -----------------^"
+# rm -f *.html
+# rm -f *.zip
