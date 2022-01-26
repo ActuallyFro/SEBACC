@@ -36,6 +36,15 @@ if [ ! -s "$keyFile" ]; then
     exit 1
 fi
 
+#rm zip and html files if "--clean" is set
+if [ "$1" == "--clean" ]; then
+    echo "[BPD] [INFO] Cleaning up old files..."
+    rm *.zip
+    rm *.html
+    echo "[BPD] [INFO] Done!"
+    exit
+fi
+
 BluePrintModNumber="$1"
 #check if BluePrintModNumber is a number
 if [ -z "$BluePrintModNumber" ] || [ "$BluePrintModNumber" -eq 0 ]; then
