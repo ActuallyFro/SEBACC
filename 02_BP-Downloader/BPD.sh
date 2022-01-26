@@ -93,7 +93,8 @@ else
     echo "[BPD] [INFO] File downloaded!"
 fi
 
-unzip -f -j "$BluePrintModNumber.zip" "bp.sbc" && mv "bp.sbc" "bp_$BluePrintModNumber.sbc"
+unzip -f -j "$BluePrintModNumber.zip" "bp.sbc" > /dev/null 2>&1
+mv "bp.sbc" "bp_$BluePrintModNumber.sbc" > /dev/null 2>&1
 
 if [ ! -f "bp_$BluePrintModNumber.sbc" ]; then
     echo "[BPD] [ERROR] SBC file does not exist!!!"
@@ -109,7 +110,28 @@ if [ ! -s "bp_$BluePrintModNumber.sbc" ]; then
     exit 1
 fi
 
-echo "[BPD] [INFO] Blue Print for mod ($BluePrintModNumber) downloaded!"
+firstTwo=$(cat "bp_$BluePrintModNumber.sbc" | grep "DisplayName" | head -n 2)
+
+loop="1"
+user="hello"
+modName="hi"
+
+while read -r line; do
+    temp=`echo "$line" | sed "s/<DisplayName>//g" | sed "s/<\/DisplayName>//g" | sed 's/^ *//g' | sed 's/ *$//g' | tr -dc '[:alnum:] '`
+    # echo "[BPD] [DEBUG] '$temp'"
+    if [[ "$loop" == "1" ]]; then
+        # echo "[BPD] [DEBUG] Saving user name... $temp"
+        user="$temp"
+
+    elif [[ "$loop" == "2" ]]; then
+        # echo "[BPD] [DEBUG] Saving mod name... $temp"
+        modName="$temp"
+    fi
+
+    loop=$((loop+1))
+done <<< "$(echo -e "$firstTwo")"
+
+echo "[BPD] [INFO] Blue Print for mod '$modName' by '$user' (ID: $BluePrintModNumber) downloaded!"
 
 rm -f *.html
 rm -f *.zip
