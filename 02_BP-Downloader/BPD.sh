@@ -40,7 +40,9 @@ BluePrintModNumber="$1"
 #check if BluePrintModNumber is a number
 if [ -z "$BluePrintModNumber" ] || [ "$BluePrintModNumber" -eq 0 ]; then
     echo "[BPD] [ERROR] You need to specify a Mod Number!"
-
+    echo ""
+    echo "Go to your Mod.io page: https://mod.io/members/<YOUR ID>"
+    echo "Then find a Mod with its entry: (mod ID: #######)"
     exit 1
 fi
 
